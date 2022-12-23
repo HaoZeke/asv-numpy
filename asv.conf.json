@@ -7,11 +7,11 @@
     "project": "project",
 
     // The project's homepage
-    "project_url": "http://project-homepage.org/",
+    "project_url": "http://numpy.org/",
 
     // The URL or local path of the source code repository for the
     // project being benchmarked
-    "repo": "../numpy",
+    "repo": "numpy",
 
     // The Python project's subdirectory in your repo.  If missing or
     // the empty string, the project is assumed to be located at the root
@@ -62,7 +62,7 @@
     "conda_channels": ["conda-forge", "defaults"],
 
     // A conda environment file that is used for environment creation.
-    "conda_environment_file": "../numpy/environment.yml",
+    "conda_environment_file": "numpy/environment.yml",
 
     // The matrix of dependencies to test.  Each key of the "req"
     // requirements dictionary is the name of a package (in PyPI) and
@@ -93,6 +93,11 @@
     //     "env": {"ENV_VAR_1": ["val1", "val2"]},
     //     "env_nobuild": {"ENV_VAR_2": ["val3", null]},
     // },
+    "matrix": {
+        "req": {
+            "asv" : [""]
+        }
+    }
 
     // Combinations of libraries/python versions can be excluded/included
     // from the set to test. Each entry is a dictionary containing additional
@@ -136,7 +141,7 @@
 
     // The directory (relative to the current directory) that benchmarks are
     // stored in.  If not provided, defaults to "benchmarks"
-    "benchmark_dir": "../numpy/benchmarks/benchmarks",
+    "benchmark_dir": "numpy/benchmarks/benchmarks",
 
     // The directory (relative to the current directory) to cache the Python
     // environments in.  If not provided, defaults to "env"
@@ -156,7 +161,7 @@
     // `asv` will cache results of the recent builds in each
     // environment, making them faster to install next time.  This is
     // the number of builds to keep, per environment.
-    // "build_cache_size": 2,
+    "build_cache_size": 0,
 
     // The commits after which the regression search in `asv publish`
     // should start looking for regressions. Dictionary whose keys are
