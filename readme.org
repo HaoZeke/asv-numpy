@@ -1,0 +1,6 @@
+#+title: Readme
+
+* About
+
+This is a simple repository to setup and run NumPy ~asv~ benchmarks. The results
+are currently (naively) stored as is.
