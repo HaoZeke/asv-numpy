@@ -4,7 +4,7 @@
     "version": 1,
 
     // The name of the project being benchmarked
-    "project": "project",
+    "project": "numpy",
 
     // The project's homepage
     "project_url": "http://numpy.org/",
@@ -31,7 +31,6 @@
     // List of branches to benchmark. If not provided, defaults to "master"
     // (for git) or "default" (for mercurial).
     "branches": ["main"], // for git
-    // "branches": ["default"],    // for mercurial
 
     // The DVCS being used.  If not set, it will be automatically
     // determined from "repo" by looking at the protocol in the URL
@@ -51,7 +50,7 @@
     //"install_timeout": 600,
 
     // the base URL to show a commit for the project.
-    // "show_commit_url": "http://github.com/owner/project/commit/",
+    "show_commit_url": "https://github.com/numpy/numpy/commit/",
 
     // The Pythons you'd like to test against.  If not provided, defaults
     // to the current version of Python used to run `asv`.
@@ -93,11 +92,14 @@
     //     "env": {"ENV_VAR_1": ["val1", "val2"]},
     //     "env_nobuild": {"ENV_VAR_2": ["val3", null]},
     // },
-    "matrix": {
-        "req": {
-            "asv" : [""]
-        }
-    },
+
+    // Single versions are handled by the conda environment
+    // "matrix": {
+    //     "req": {
+    //         "Cython": [],
+    //         "setuptools": ["59.2.0"]
+    //     }
+    // },
 
     // Combinations of libraries/python versions can be excluded/included
     // from the set to test. Each entry is a dictionary containing additional
