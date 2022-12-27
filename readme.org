@@ -4,3 +4,23 @@
 
 This is a simple repository to setup and run NumPy ~asv~ benchmarks. The results
 are currently (naively) stored as is.
+** Contributing
+We welcome contributed results as PRs. For generating subsets of interest:
+#+begin_src bash
+# Get commits for tags
+# delete tag_commits.txt before re-runs
+for gtag in $(git tag --list --sort taggerdate | grep "^v"); do
+    git log $gtag --oneline -n1 --decorate=no | awk '{print $1;}' >> tag_commits_only.txt
+done
+# Use the last 20
+tail --lines=20 tag_commits_only.txt > 20_vers.txt
+asv run HASHFILE:20_vers.txt
+#+end_src
+
+Note that each tag and the corresponding commit is already shipped in ~subsets~
+so this can be simply:
+
+#+begin_src bash
+cat subsets/tag_commits.txt | awk '{print $2;}' | tail --lines=20 > 20_vers.txt
+asv run HASHFILE:20_vers.txt
+#+end_src
