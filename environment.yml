@@ -48,3 +48,4 @@ dependencies:
   - asv
   - dvc # storage
   - pyperf
+  - conda # for micromamba
