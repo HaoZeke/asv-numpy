@@ -3,7 +3,7 @@
 * About
 
 This is a simple repository to setup and run NumPy ~asv~ benchmarks. The results
-are currently (naively) stored as is.
+are stored with ~dvc~ on [[https://dagshub.com/HaoZeke/asv-numpy][DagsHub]].
 ** Contributing
 We welcome contributed results as PRs. For generating subsets of interest:
 #+begin_src bash
