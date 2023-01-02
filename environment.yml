@@ -49,3 +49,6 @@ dependencies:
   - dvc # storage
   - pyperf
   - conda # for micromamba
+  - selenium
+  - flake8
+  - pre-commit
