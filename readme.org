@@ -3,13 +3,14 @@
 * About
 
 This is a simple repository to setup and run NumPy ~asv~ benchmarks. The results
-are currently (naively) stored as is.
+are stored with ~dvc~ on
+[[https://dagshub.com/HaoZeke/asv-numpy][DagsHub]].
 ** Usage
 Since the data is stored with ~dvc~ we have some additional steps.
 #+begin_src bash
 micromamba create -f environment.yml
 micromamba activate numpy-bench
-
+# Follow the dvc repo setup instructions
 #+end_src
 * Contributing
 We welcome contributed results as PRs.
@@ -26,8 +27,8 @@ would be best to use an unloaded bare metal machine.
 
 Additionally, try to have at-least a few isolated CPUs via the ~isolcpus~ kernel
 parameter.
-** Running
-For generating subsets of interest:
+** Contributing
+We welcome contributed results as PRs. For generating subsets of interest:
 #+begin_src bash
 # Get commits for tags
 # delete tag_commits.txt before re-runs
