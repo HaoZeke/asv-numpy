@@ -4,8 +4,30 @@
 
 This is a simple repository to setup and run NumPy ~asv~ benchmarks. The results
 are currently (naively) stored as is.
-** Contributing
-We welcome contributed results as PRs. For generating subsets of interest:
+** Usage
+Since the data is stored with ~dvc~ we have some additional steps.
+#+begin_src bash
+micromamba create -f environment.yml
+micromamba activate numpy-bench
+
+#+end_src
+* Contributing
+We welcome contributed results as PRs.
+** Setup
+Please ensure at a minimum that the machine being used is [[https://asv.readthedocs.io/en/stable/tuning.html][tuned for benchmarks]].
+#+begin_src bash
+export OPENBLAS_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export OMP_NUM_THREADS=1
+sudo python -mpyperf system tune
+#+end_src
+If running within ~docker~ keep the ~seccomp~ [[https://pythonspeed.com/articles/docker-performance-overhead/][issues]] (among others) in mind. It
+would be best to use an unloaded bare metal machine.
+
+Additionally, try to have at-least a few isolated CPUs via the ~isolcpus~ kernel
+parameter.
+** Running
+For generating subsets of interest:
 #+begin_src bash
 # Get commits for tags
 # delete tag_commits.txt before re-runs
@@ -14,7 +36,7 @@ for gtag in $(git tag --list --sort taggerdate | grep "^v"); do
 done
 # Use the last 20
 tail --lines=20 tag_commits_only.txt > 20_vers.txt
-asv run HASHFILE:20_vers.txt
+asv run -m $(hostnamectl hostname) -j HASHFILE:20_vers.txt
 #+end_src
 
 Note that each tag and the corresponding commit is already shipped in ~subsets~
@@ -22,5 +44,16 @@ so this can be simply:
 
 #+begin_src bash
 cat subsets/tag_commits.txt | awk '{print $2;}' | tail --lines=20 > 20_vers.txt
-asv run HASHFILE:20_vers.txt
+asv run -m $(hostnamectl hostname) -j HASHFILE:20_vers.txt
 #+end_src
+
+When there are new benchmarks, skip the existing ones by running:
+
+#+begin_src bash
+asv run HASHFILE:20_vers.txt -k
+#+end_src
+
+** Commiting Results
+We use ~dvc~ and DagsHub for storing the machine data.
+* License
+MIT.
