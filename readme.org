@@ -12,6 +12,33 @@ micromamba create -f environment.yml
 micromamba activate numpy-bench
 # Follow the dvc repo setup instructions
 #+end_src
+
+* Site
+
+Published results: [[https://haozeke.github.io/asv-numpy/][haozeke.github.io/asv-numpy]]
+
+The ~gh-pages~ branch is a normal ~asv publish~ tree with the
+[[https://github.com/HaoZeke/asv_tachyon][asv-tachyon]] static SPA installed on top (same ~index.json~ /
+~graphs/**~ / ~regressions.json~ data contract). No server-side app; works
+on GitHub Pages and any other static host.
+
+** Refreshing the published UI after a new ~asv publish~
+
+#+begin_src bash
+pip install -U asv-tachyon
+# after asv publish into html_dir (or after dvc checkout of published outputs)
+asv-tachyon install path/to/html_dir
+# commit/push the html_dir to the gh-pages branch
+#+end_src
+
+Or from a checkout of ~gh-pages~:
+
+#+begin_src bash
+git checkout gh-pages
+asv-tachyon install .
+git add -A && git commit -m "ENH: refresh asv-tachyon UI" && git push origin gh-pages
+#+end_src
+
 * Contributing
 We welcome contributed results as PRs.
 ** Setup
